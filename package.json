@@ -1,6 +1,6 @@
 {
-  "name": "cz-conventional-changelog",
-  "version": "0.0.0-semantically-released.0",
+  "name": "cz-conventional-changelog-casumo",
+  "version": "0.0.1-casumo",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "index.js",
   "scripts": {

@@ -39,6 +39,16 @@ module.exports = function (options) {
     // By default, we'll de-indent your commit
     // template and will keep empty lines.
     prompter: function(cz, commit) {
+
+      const spawn = require('child_process').spawnSync;
+      const ls = spawn('git', ['rev-parse', '--abbrev-ref', 'HEAD']);
+      const branch = ls.stdout.toString();
+      let useBranch;
+
+      if (branch.startsWith('iss')) {
+        useBranch = "Casumo/Home#" + branch.match(/iss(\d+)/)[1];
+      }
+
       console.log('\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n');
 
       // Let's ask some questions of the user
@@ -105,7 +115,7 @@ module.exports = function (options) {
 
         var footer = filter([ breaking, issues ]).join('\n\n');
 
-        commit(head + '\n\n' + body + '\n\n' + footer);
+        commit(head + '\n\n' + body + '\n\n' + footer + '\n\n' + (useBranch || ''));
       });
     }
   };
